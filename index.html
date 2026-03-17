@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Sachin - Home</title>
+<style>
+body {
+font-family: monospace;
+background: #000;
+color: #0f0;
+text-align: center;
+padding: 40px;
+line-height: 1.8;
+margin: 0;
+}
+h1 { font-size: 3em; margin: 20px 0 10px; }
+#age { font-size: 2.4em; font-weight: bold; color: #0f0; }
+#left { font-size: 1.8em; color: #f33; }
+hr { border: 1px solid #333; margin: 40px 0; }
+ul { list-style: none; padding: 0; }
+a { color: #0ff; }
+</style>
+</head>
+<body>
+<h1>Sachin - Home</h1>
+<h2>Sachin</h2>
+
+<p id="age">Loading your age...</p>
+<p id="left">Loading years left...</p>
+
+<hr>
+
+<h3>Projects (add your own later)</h3>
+<ul>
+<li>Atom Simulation</li>
+<li>Black Hole Simulation</li>
+<li>Gravity Simulation</li>
+</ul>
+
+<hr>
+<p><a href="https://github.com/sachin" target="_blank">My GitHub</a> (change link later)</p>
+
+<script>
+// ================== YOUR INFO (updated with exact birth time) ==================
+const birthDate = new Date(1998, 10, 27, 20, 15, 0);
+// November = month 10 (Jan=0), 20 = 8 PM, 15 = minutes, 0 = seconds
+
+const lifeExpectancy = 81; // change this number if you want
+// ========================================================================
+
+function updateAge() {
+const now = new Date();
+const msLived = now - birthDate;
+const years = msLived / (1000 * 60 * 60 * 24 * 365.2425); // accounts for leap years
+
+document.getElementById('age').textContent =
+`I am ${years.toFixed(15)} years old`;
+
+const yearsLeft = lifeExpectancy - years;
+document.getElementById('left').textContent =
+`I probably have ${yearsLeft.toFixed(15)} years left`;
+}
+
+// Updates very frequently so the decimals move smoothly (like kavang.com)
+setInterval(updateAge, 10);
+updateAge(); // start immediately
+</script>
+</body>
+</html>
