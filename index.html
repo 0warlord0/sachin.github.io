@@ -38,20 +38,20 @@ a { color: #0ff; }
 </ul>
 
 <hr>
-<p><a href="https://github.com/sachin" target="_blank">My GitHub</a> (change link later)</p>
+<p><a href="https://github.com/yourusername" target="_blank">My GitHub</a> (change link later)</p>
 
 <script>
-// ================== YOUR INFO (updated with exact birth time) ==================
+// ================== YOUR INFO (birth 27 Nov 1998 8:15 PM) ==================
 const birthDate = new Date(1998, 10, 27, 20, 15, 0);
-// November = month 10 (Jan=0), 20 = 8 PM, 15 = minutes, 0 = seconds
+// November is month 10 (because January = 0), 20 = 8 PM
 
-const lifeExpectancy = 81; // change this number if you want
-// ========================================================================
+const lifeExpectancy = 81;
+// ==========================================================================
 
 function updateAge() {
 const now = new Date();
 const msLived = now - birthDate;
-const years = msLived / (1000 * 60 * 60 * 24 * 365.2425); // accounts for leap years
+const years = msLived / (1000 * 60 * 60 * 24 * 365.2425);
 
 document.getElementById('age').textContent =
 `I am ${years.toFixed(15)} years old`;
@@ -61,4 +61,8 @@ document.getElementById('left').textContent =
 `I probably have ${yearsLeft.toFixed(15)} years left`;
 }
 
-
+setInterval(updateAge, 10);
+updateAge();
+</script>
+</body>
+</html>
