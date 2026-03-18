@@ -7,148 +7,148 @@
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
 
   <style>
     * { margin:0; padding:0; box-sizing:border-box; }
     body {
       font-family: 'Inter', system-ui, sans-serif;
-      background: linear-gradient(140deg, #0a0e1a 0%, #141828 100%);
-      color: #e0e0ff;
+      background: linear-gradient(145deg, #0b0f1c 0%, #111524 100%);
+      color: #e8e8ff;
       min-height: 100vh;
       overflow-x: hidden;
     }
     .container {
-      max-width: 860px;
+      max-width: 820px;
       margin: 0 auto;
-      padding: 5rem 1.5rem 8rem;
+      padding: 5rem 1.5rem 9rem;
       position: relative;
+      z-index: 1;
     }
     header {
       text-align: center;
-      margin-bottom: 6rem;
+      margin-bottom: 7rem;
     }
     h1 {
       font-family: 'Space Grotesk', sans-serif;
-      font-size: 4.8rem;
+      font-size: 5.2rem;
       font-weight: 700;
-      letter-spacing: -2px;
-      background: linear-gradient(90deg, #c084fc, #7dd3fc, #a78bfa);
+      letter-spacing: -3px;
+      background: linear-gradient(90deg, #b388ff, #81d4fa, #b388ff);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      margin-bottom: 1rem;
+      margin-bottom: 1.2rem;
     }
     .tagline {
-      font-size: 1.5rem;
-      color: #b0b0e0;
+      font-size: 1.45rem;
+      color: #b8b8e8;
       font-weight: 300;
-      min-height: 2.2rem;
-      margin-bottom: 1.5rem;
+      min-height: 2.4rem;
+      margin-bottom: 1.8rem;
     }
     .age-line {
-      font-size: 1.25rem;
-      color: #9090c0;
-      margin: 1.5rem 0 3rem;
+      font-size: 1.35rem;
+      color: #a0a0d0;
+      font-weight: 400;
+      margin: 2rem 0 4rem;
     }
 
-    /* Canvas background toy */
+    /* Background physics toy */
     #physics-canvas {
       position: fixed;
       inset: 0;
       z-index: -1;
-      opacity: 0.25;
+      opacity: 0.22;
       pointer-events: none;
     }
 
     .section {
-      background: rgba(30, 30, 60, 0.5);
-      backdrop-filter: blur(14px);
-      border: 1px solid rgba(140, 140, 200, 0.2);
+      background: rgba(28, 28, 55, 0.48);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(130, 130, 200, 0.18);
       border-radius: 20px;
-      padding: 2.8rem;
-      margin: 3rem 0;
-      box-shadow: 0 12px 40px rgba(0,0,0,0.4);
-      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      padding: 2.5rem 2.8rem;
+      margin: 3.5rem 0;
+      box-shadow: 0 10px 35px rgba(0,0,0,0.38);
+      transition: transform 0.35s ease, box-shadow 0.35s ease;
     }
     .section:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 24px 60px rgba(0,0,0,0.5);
+      transform: translateY(-6px);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.45);
     }
     h2 {
-      font-size: 2.1rem;
-      margin-bottom: 1.8rem;
-      color: #d0d0ff;
-      position: relative;
+      font-size: 2rem;
+      margin-bottom: 1.6rem;
+      color: #d8d8ff;
     }
     h2::after {
       content: '';
-      position: absolute;
-      bottom: -8px;
-      left: 0;
-      width: 70px;
-      height: 4px;
-      background: linear-gradient(90deg, #c084fc, #7dd3fc);
-      border-radius: 4px;
+      display: block;
+      width: 65px;
+      height: 3px;
+      background: linear-gradient(90deg, #b388ff, #81d4fa);
+      margin-top: 0.8rem;
+      border-radius: 3px;
     }
 
     /* Quiz */
     .quiz-option {
-      background: rgba(50,50,90,0.6);
-      border: 1px solid rgba(160,160,220,0.3);
+      background: rgba(45,45,80,0.55);
+      border: 1px solid rgba(150,150,220,0.25);
       border-radius: 12px;
-      padding: 1.2rem 1.6rem;
+      padding: 1.1rem 1.5rem;
       margin: 1rem 0;
       cursor: pointer;
-      transition: all 0.25s ease;
+      transition: all 0.28s ease;
     }
     .quiz-option:hover {
-      background: rgba(90,70,180,0.4);
-      border-color: #a78bfa;
-      transform: translateX(8px);
+      background: rgba(80,70,160,0.38);
+      border-color: #b388ff;
+      transform: translateX(6px);
     }
     .quiz-result {
       margin-top: 2rem;
-      padding: 1.5rem;
+      padding: 1.4rem;
       border-radius: 12px;
-      background: rgba(40,100,80,0.3);
-      border: 1px solid #6ee7b7;
+      background: rgba(35,90,70,0.28);
+      border: 1px solid #66d9a8;
       display: none;
     }
 
     /* Facts */
     #fact-text {
-      font-size: 1.2rem;
-      line-height: 1.7;
-      min-height: 120px;
-      color: #c0c0e8;
+      font-size: 1.18rem;
+      line-height: 1.75;
+      min-height: 110px;
+      color: #c8c8f0;
     }
     button {
-      background: linear-gradient(90deg, #a78bfa, #7dd3fc);
-      color: #0f0f1a;
+      background: linear-gradient(90deg, #b388ff, #81d4fa);
+      color: #0c0f1c;
       border: none;
-      padding: 0.9rem 1.8rem;
-      border-radius: 50px;
+      padding: 0.85rem 1.9rem;
+      border-radius: 999px;
       font-weight: 600;
       cursor: pointer;
-      margin-top: 1.2rem;
+      margin-top: 1.4rem;
       transition: all 0.3s;
     }
     button:hover {
-      transform: scale(1.06);
-      box-shadow: 0 8px 24px rgba(167,139,250,0.4);
+      transform: scale(1.05);
+      box-shadow: 0 10px 30px rgba(179,136,255,0.35);
     }
 
     footer {
       text-align: center;
-      margin-top: 7rem;
-      color: #606080;
+      margin-top: 8rem;
+      color: #707090;
       font-size: 1rem;
     }
 
     @media (max-width: 640px) {
-      h1 { font-size: 3.4rem; }
-      .container { padding: 4rem 1.2rem 6rem; }
-      .section { padding: 2rem; }
+      h1 { font-size: 3.8rem; letter-spacing: -2px; }
+      .container { padding: 4rem 1.2rem 7rem; }
+      .section { padding: 2rem 1.8rem; }
     }
   </style>
 </head>
@@ -167,485 +167,47 @@
       </div>
     </header>
 
-    <!-- Interactive Gravity Toy -->
+    <!-- Gravity toy intro -->
     <div class="section">
-      <h2>Play with tiny gravity</h2>
-      <p style="margin-bottom:1.5rem; color:#b0b0e0;">
-        Move your mouse (or finger) around — watch how particles get attracted like mini black holes or atoms in your simulations. Stay a bit and feel the physics vibe.
+      <h2>Move your mouse — feel gravity</h2>
+      <p style="color:#c0c0e8; line-height:1.7;">
+        Tiny particles react to your cursor like atoms or mini black holes.<br>
+        Play around for a minute — it's more relaxing than it sounds.
       </p>
-      <!-- The canvas is fixed behind, but this section invites attention -->
     </div>
 
-    <!-- Quick Quiz -->
+    <!-- Quick quiz -->
     <div class="section">
-      <h2>Which kind of creator are you? (30-second quiz)</h2>
-      <p>Answer one question — get a fun label tied to physics & code:</p>
+      <h2>30-second vibe check</h2>
+      <p>Pick one — see which kind of creator you really are:</p>
       
       <div class="quiz-option" data-score="blackhole">I love chaotic, unstoppable forces</div>
       <div class="quiz-option" data-score="atom">I enjoy elegant, tiny precise systems</div>
       <div class="quiz-option" data-score="gravity">I'm all about invisible connections pulling things together</div>
       
       <div class="quiz-result" id="quiz-result">
-        <h3>Your vibe:</h3>
+        <h3>Your creator type:</h3>
         <p id="quiz-text"></p>
       </div>
     </div>
 
-    <!-- Random Physics Facts -->
+    <!-- Physics facts -->
     <div class="section">
-      <h2>Random physics bite</h2>
-      <p id="fact-text">Click below to learn something weird & wonderful about the universe...</p>
-      <button id="new-fact">Reveal a new fact →</button>
+      <h2>Weird physics fact</h2>
+      <p id="fact-text">Click to discover something mind-bending about the universe...</p>
+      <button id="new-fact">New fact →</button>
     </div>
 
     <footer>
-      Made with curiosity • Mysuru, 2026
+      Curiosity never sleeps • Mysuru • 2026
     </footer>
 
   </div>
 
   <script>
-    // ─────────────── Age calculator ───────────────
-    const birthDate = new Date("2000-05-15"); // ← change to your real birth date
+    // ─── Age calculator (kept exactly as before) ───
+    const birthDate = new Date("2000-05-15"); // ← change this to your actual birth date
     const lifeExpectancy = 82;
     const now = new Date();
     let age = now.getFullYear() - birthDate.getFullYear();
-    if (now < new Date(now.getFullYear(), birthDate.getMonth(), birthDate.getDate())) age--;
-    const yearsLived = age + (now - new Date(now.getFullYear(), birthDate.getMonth(), birthDate.getDate())) / (365.25 * 86400000);
-    const yearsLeft = lifeExpectancy - yearsLived;
-    document.getElementById("age").textContent = `Age ${age}`;
-    document.getElementById("years-left").textContent = `≈ ${yearsLeft.toFixed(1)} years of adventures left`;
-
-    // ─────────────── Typing tagline ───────────────
-    const tag = "Creative Coder  •  Physics Enthusiast  •  Building tiny universes";
-    let i = 0;
-    function type() {
-      if (i < tag.length) {
-        document.getElementById("typing-tagline").textContent += tag.charAt(i);
-        i++;
-        setTimeout(type, 60);
-      }
-    }
-    setTimeout(type, 800);
-
-    // ─────────────── Mouse gravity particles ───────────────
-    const canvas = document.getElementById('physics-canvas');
-    const ctx = canvas.getContext('2d');
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    window.addEventListener('resize', () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    });
-
-    const particles = [];
-    const mouse = { x: null, y: null, radius: 120 };
-
-    class Particle {
-      constructor() {
-        this.x = Math.random() * canvas.width;
-        this.y = Math.random() * canvas.height;
-        this.size = Math.random() * 3 + 1;
-        this.speedX = Math.random() * 1.5 - 0.75;
-        this.speedY = Math.random() * 1.5 - 0.75;
-      }
-      update() {
-        if (mouse.x && mouse.y) {
-          let dx = mouse.x - this.x;
-          let dy = mouse.y - this.y;
-          let distance = Math.sqrt(dx*dx + dy*dy);
-          if (distance < mouse.radius) {
-            let force = (mouse.radius - distance) / mouse.radius;
-            this.x -= dx * force * 0.08;
-            this.y -= dy * force * 0.08;
-          }
-        }
-        this.x += this.speedX * 0.4;
-        this.y += this.speedY * 0.4;
-        if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
-        if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
-      }
-      draw() {
-        ctx.fillStyle = 'rgba(160, 180, 255, 0.7)';
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI*2);
-        ctx.fill();
-      }
-    }
-
-    for (let i = 0; i < 80; i++) particles.push(new Particle());
-
-    function animate() {
-      ctx.clearRect(0,0,canvas.width,canvas.height);
-      particles.forEach(p => { p.update(); p.draw(); });
-      requestAnimationFrame(animate);
-    }
-    animate();
-
-    window.addEventListener('mousemove', e => { mouse.x = e.x; mouse.y = e.y; });
-    window.addEventListener('touchmove', e => {
-      mouse.x = e.touches[0].clientX;
-      mouse.y = e.touches[0].clientY;
-    });
-
-    // ─────────────── Quiz logic ───────────────
-    document.querySelectorAll('.quiz-option').forEach(opt => {
-      opt.addEventListener('click', () => {
-        const score = opt.dataset.score;
-        let result = "";
-        if (score === "blackhole") result = "You're a <strong>Black Hole Coder</strong> — intense, mysterious, pulling ideas into deep simulations.";
-        else if (score === "atom") result = "You're an <strong>Atomic Architect</strong> — precision lover, building elegant microscopic worlds.";
-        else result = "You're a <strong>Gravity Weaver</strong> — master of invisible forces that connect everything in code & physics.";
-        
-        document.getElementById('quiz-text').innerHTML = result;
-        document.getElementById('quiz-result').style.display = 'block';
-      });
-    });
-
-    // ─────────────── Random facts ───────────────
-    const facts = [
-      "If you could fold a piece of paper 42 times, it would reach the Moon.",
-      "Neutron stars can spin up to 700 times per second — imagine that as code loops.",
-      "The universe is beige — officially called 'Cosmic Latte'.",
-      "A day on Venus is longer than a year on Venus.",
-      "Quantum entanglement means two particles can instantly affect each other — even across galaxies.",
-      "There are more trees on Earth (\~3 trillion) than stars in the Milky Way (\~100–400 billion).",
-      "Time moves slower at sea level than on a mountain — thanks to general relativity.",
-      "The smell of rain is caused by a bacteria called actinomycetes — physics meets biology."
-    ];
-
-    document.getElementById('new-fact').addEventListener('click', () => {
-      const randomFact = facts[Math.floor(Math.random() * facts.length)];
-      document.getElementById('fact-text').textContent = randomFact;
-    });
-    // Show one immediately
-    document.getElementById('fact-text').textContent = facts[0];
-  </script>
-
-</body>
-</html><!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Sachin • Creative Coder & Physics Dreamer</title>
-  
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
-
-  <style>
-    * { margin:0; padding:0; box-sizing:border-box; }
-    body {
-      font-family: 'Inter', system-ui, sans-serif;
-      background: linear-gradient(140deg, #0a0e1a 0%, #141828 100%);
-      color: #e0e0ff;
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
-    .container {
-      max-width: 860px;
-      margin: 0 auto;
-      padding: 5rem 1.5rem 8rem;
-      position: relative;
-    }
-    header {
-      text-align: center;
-      margin-bottom: 6rem;
-    }
-    h1 {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 4.8rem;
-      font-weight: 700;
-      letter-spacing: -2px;
-      background: linear-gradient(90deg, #c084fc, #7dd3fc, #a78bfa);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      margin-bottom: 1rem;
-    }
-    .tagline {
-      font-size: 1.5rem;
-      color: #b0b0e0;
-      font-weight: 300;
-      min-height: 2.2rem;
-      margin-bottom: 1.5rem;
-    }
-    .age-line {
-      font-size: 1.25rem;
-      color: #9090c0;
-      margin: 1.5rem 0 3rem;
-    }
-
-    /* Canvas background toy */
-    #physics-canvas {
-      position: fixed;
-      inset: 0;
-      z-index: -1;
-      opacity: 0.25;
-      pointer-events: none;
-    }
-
-    .section {
-      background: rgba(30, 30, 60, 0.5);
-      backdrop-filter: blur(14px);
-      border: 1px solid rgba(140, 140, 200, 0.2);
-      border-radius: 20px;
-      padding: 2.8rem;
-      margin: 3rem 0;
-      box-shadow: 0 12px 40px rgba(0,0,0,0.4);
-      transition: transform 0.4s ease, box-shadow 0.4s ease;
-    }
-    .section:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 24px 60px rgba(0,0,0,0.5);
-    }
-    h2 {
-      font-size: 2.1rem;
-      margin-bottom: 1.8rem;
-      color: #d0d0ff;
-      position: relative;
-    }
-    h2::after {
-      content: '';
-      position: absolute;
-      bottom: -8px;
-      left: 0;
-      width: 70px;
-      height: 4px;
-      background: linear-gradient(90deg, #c084fc, #7dd3fc);
-      border-radius: 4px;
-    }
-
-    /* Quiz */
-    .quiz-option {
-      background: rgba(50,50,90,0.6);
-      border: 1px solid rgba(160,160,220,0.3);
-      border-radius: 12px;
-      padding: 1.2rem 1.6rem;
-      margin: 1rem 0;
-      cursor: pointer;
-      transition: all 0.25s ease;
-    }
-    .quiz-option:hover {
-      background: rgba(90,70,180,0.4);
-      border-color: #a78bfa;
-      transform: translateX(8px);
-    }
-    .quiz-result {
-      margin-top: 2rem;
-      padding: 1.5rem;
-      border-radius: 12px;
-      background: rgba(40,100,80,0.3);
-      border: 1px solid #6ee7b7;
-      display: none;
-    }
-
-    /* Facts */
-    #fact-text {
-      font-size: 1.2rem;
-      line-height: 1.7;
-      min-height: 120px;
-      color: #c0c0e8;
-    }
-    button {
-      background: linear-gradient(90deg, #a78bfa, #7dd3fc);
-      color: #0f0f1a;
-      border: none;
-      padding: 0.9rem 1.8rem;
-      border-radius: 50px;
-      font-weight: 600;
-      cursor: pointer;
-      margin-top: 1.2rem;
-      transition: all 0.3s;
-    }
-    button:hover {
-      transform: scale(1.06);
-      box-shadow: 0 8px 24px rgba(167,139,250,0.4);
-    }
-
-    footer {
-      text-align: center;
-      margin-top: 7rem;
-      color: #606080;
-      font-size: 1rem;
-    }
-
-    @media (max-width: 640px) {
-      h1 { font-size: 3.4rem; }
-      .container { padding: 4rem 1.2rem 6rem; }
-      .section { padding: 2rem; }
-    }
-  </style>
-</head>
-<body>
-
-  <canvas id="physics-canvas"></canvas>
-
-  <div class="container">
-
-    <header>
-      <h1>Sachin</h1>
-      <div class="tagline" id="typing-tagline"></div>
-      <div class="age-line">
-        <span id="age">Calculating age...</span> • 
-        <span id="years-left">Counting years left...</span>
-      </div>
-    </header>
-
-    <!-- Interactive Gravity Toy -->
-    <div class="section">
-      <h2>Play with tiny gravity</h2>
-      <p style="margin-bottom:1.5rem; color:#b0b0e0;">
-        Move your mouse (or finger) around — watch how particles get attracted like mini black holes or atoms in your simulations. Stay a bit and feel the physics vibe.
-      </p>
-      <!-- The canvas is fixed behind, but this section invites attention -->
-    </div>
-
-    <!-- Quick Quiz -->
-    <div class="section">
-      <h2>Which kind of creator are you? (30-second quiz)</h2>
-      <p>Answer one question — get a fun label tied to physics & code:</p>
-      
-      <div class="quiz-option" data-score="blackhole">I love chaotic, unstoppable forces</div>
-      <div class="quiz-option" data-score="atom">I enjoy elegant, tiny precise systems</div>
-      <div class="quiz-option" data-score="gravity">I'm all about invisible connections pulling things together</div>
-      
-      <div class="quiz-result" id="quiz-result">
-        <h3>Your vibe:</h3>
-        <p id="quiz-text"></p>
-      </div>
-    </div>
-
-    <!-- Random Physics Facts -->
-    <div class="section">
-      <h2>Random physics bite</h2>
-      <p id="fact-text">Click below to learn something weird & wonderful about the universe...</p>
-      <button id="new-fact">Reveal a new fact →</button>
-    </div>
-
-    <footer>
-      Made with curiosity • Mysuru, 2026
-    </footer>
-
-  </div>
-
-  <script>
-    // ─────────────── Age calculator ───────────────
-    const birthDate = new Date("2000-05-15"); // ← change to your real birth date
-    const lifeExpectancy = 82;
-    const now = new Date();
-    let age = now.getFullYear() - birthDate.getFullYear();
-    if (now < new Date(now.getFullYear(), birthDate.getMonth(), birthDate.getDate())) age--;
-    const yearsLived = age + (now - new Date(now.getFullYear(), birthDate.getMonth(), birthDate.getDate())) / (365.25 * 86400000);
-    const yearsLeft = lifeExpectancy - yearsLived;
-    document.getElementById("age").textContent = `Age ${age}`;
-    document.getElementById("years-left").textContent = `≈ ${yearsLeft.toFixed(1)} years of adventures left`;
-
-    // ─────────────── Typing tagline ───────────────
-    const tag = "Creative Coder  •  Physics Enthusiast  •  Building tiny universes";
-    let i = 0;
-    function type() {
-      if (i < tag.length) {
-        document.getElementById("typing-tagline").textContent += tag.charAt(i);
-        i++;
-        setTimeout(type, 60);
-      }
-    }
-    setTimeout(type, 800);
-
-    // ─────────────── Mouse gravity particles ───────────────
-    const canvas = document.getElementById('physics-canvas');
-    const ctx = canvas.getContext('2d');
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    window.addEventListener('resize', () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    });
-
-    const particles = [];
-    const mouse = { x: null, y: null, radius: 120 };
-
-    class Particle {
-      constructor() {
-        this.x = Math.random() * canvas.width;
-        this.y = Math.random() * canvas.height;
-        this.size = Math.random() * 3 + 1;
-        this.speedX = Math.random() * 1.5 - 0.75;
-        this.speedY = Math.random() * 1.5 - 0.75;
-      }
-      update() {
-        if (mouse.x && mouse.y) {
-          let dx = mouse.x - this.x;
-          let dy = mouse.y - this.y;
-          let distance = Math.sqrt(dx*dx + dy*dy);
-          if (distance < mouse.radius) {
-            let force = (mouse.radius - distance) / mouse.radius;
-            this.x -= dx * force * 0.08;
-            this.y -= dy * force * 0.08;
-          }
-        }
-        this.x += this.speedX * 0.4;
-        this.y += this.speedY * 0.4;
-        if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
-        if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
-      }
-      draw() {
-        ctx.fillStyle = 'rgba(160, 180, 255, 0.7)';
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI*2);
-        ctx.fill();
-      }
-    }
-
-    for (let i = 0; i < 80; i++) particles.push(new Particle());
-
-    function animate() {
-      ctx.clearRect(0,0,canvas.width,canvas.height);
-      particles.forEach(p => { p.update(); p.draw(); });
-      requestAnimationFrame(animate);
-    }
-    animate();
-
-    window.addEventListener('mousemove', e => { mouse.x = e.x; mouse.y = e.y; });
-    window.addEventListener('touchmove', e => {
-      mouse.x = e.touches[0].clientX;
-      mouse.y = e.touches[0].clientY;
-    });
-
-    // ─────────────── Quiz logic ───────────────
-    document.querySelectorAll('.quiz-option').forEach(opt => {
-      opt.addEventListener('click', () => {
-        const score = opt.dataset.score;
-        let result = "";
-        if (score === "blackhole") result = "You're a <strong>Black Hole Coder</strong> — intense, mysterious, pulling ideas into deep simulations.";
-        else if (score === "atom") result = "You're an <strong>Atomic Architect</strong> — precision lover, building elegant microscopic worlds.";
-        else result = "You're a <strong>Gravity Weaver</strong> — master of invisible forces that connect everything in code & physics.";
-        
-        document.getElementById('quiz-text').innerHTML = result;
-        document.getElementById('quiz-result').style.display = 'block';
-      });
-    });
-
-    // ─────────────── Random facts ───────────────
-    const facts = [
-      "If you could fold a piece of paper 42 times, it would reach the Moon.",
-      "Neutron stars can spin up to 700 times per second — imagine that as code loops.",
-      "The universe is beige — officially called 'Cosmic Latte'.",
-      "A day on Venus is longer than a year on Venus.",
-      "Quantum entanglement means two particles can instantly affect each other — even across galaxies.",
-      "There are more trees on Earth (\~3 trillion) than stars in the Milky Way (\~100–400 billion).",
-      "Time moves slower at sea level than on a mountain — thanks to general relativity.",
-      "The smell of rain is caused by a bacteria called actinomycetes — physics meets biology."
-    ];
-
-    document.getElementById('new-fact').addEventListener('click', () => {
-      const randomFact = facts[Math.floor(Math.random() * facts.length)];
-      document.getElementById('fact-text').textContent = randomFact;
-    });
-    // Show one immediately
-    document.getElementById('fact-text').textContent = facts[0];
-  </script>
-
-</body>
-</html>
+    if (now < new Date(now.getFullYear(), birthDate.getMonth(), birthDate.getDate())) age
