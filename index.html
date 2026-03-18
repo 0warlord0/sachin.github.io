@@ -1,68 +1,326 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Sachin - Home</title>
-<style>
-body {
-font-family: monospace;
-background: #000;
-color: #0f0;
-text-align: center;
-padding: 40px;
-line-height: 1.8;
-margin: 0;
-}
-h1 { font-size: 3em; margin: 20px 0 10px; }
-#age { font-size: 2.4em; font-weight: bold; color: #0f0; }
-#left { font-size: 1.8em; color: #f33; }
-hr { border: 1px solid #333; margin: 40px 0; }
-ul { list-style: none; padding: 0; }
-a { color: #0ff; }
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sachin • Creative Coder & Physics Dreamer</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: linear-gradient(140deg, #0a0e1a 0%, #141828 100%);
+      color: #e0e0ff;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 5rem 1.5rem 8rem;
+      position: relative;
+    }
+    header {
+      text-align: center;
+      margin-bottom: 6rem;
+    }
+    h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 4.8rem;
+      font-weight: 700;
+      letter-spacing: -2px;
+      background: linear-gradient(90deg, #c084fc, #7dd3fc, #a78bfa);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 1rem;
+    }
+    .tagline {
+      font-size: 1.5rem;
+      color: #b0b0e0;
+      font-weight: 300;
+      min-height: 2.2rem;
+      margin-bottom: 1.5rem;
+    }
+    .age-line {
+      font-size: 1.25rem;
+      color: #9090c0;
+      margin: 1.5rem 0 3rem;
+    }
+
+    /* Canvas background toy */
+    #physics-canvas {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      opacity: 0.25;
+      pointer-events: none;
+    }
+
+    .section {
+      background: rgba(30, 30, 60, 0.5);
+      backdrop-filter: blur(14px);
+      border: 1px solid rgba(140, 140, 200, 0.2);
+      border-radius: 20px;
+      padding: 2.8rem;
+      margin: 3rem 0;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+    .section:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 24px 60px rgba(0,0,0,0.5);
+    }
+    h2 {
+      font-size: 2.1rem;
+      margin-bottom: 1.8rem;
+      color: #d0d0ff;
+      position: relative;
+    }
+    h2::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 0;
+      width: 70px;
+      height: 4px;
+      background: linear-gradient(90deg, #c084fc, #7dd3fc);
+      border-radius: 4px;
+    }
+
+    /* Quiz */
+    .quiz-option {
+      background: rgba(50,50,90,0.6);
+      border: 1px solid rgba(160,160,220,0.3);
+      border-radius: 12px;
+      padding: 1.2rem 1.6rem;
+      margin: 1rem 0;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+    .quiz-option:hover {
+      background: rgba(90,70,180,0.4);
+      border-color: #a78bfa;
+      transform: translateX(8px);
+    }
+    .quiz-result {
+      margin-top: 2rem;
+      padding: 1.5rem;
+      border-radius: 12px;
+      background: rgba(40,100,80,0.3);
+      border: 1px solid #6ee7b7;
+      display: none;
+    }
+
+    /* Facts */
+    #fact-text {
+      font-size: 1.2rem;
+      line-height: 1.7;
+      min-height: 120px;
+      color: #c0c0e8;
+    }
+    button {
+      background: linear-gradient(90deg, #a78bfa, #7dd3fc);
+      color: #0f0f1a;
+      border: none;
+      padding: 0.9rem 1.8rem;
+      border-radius: 50px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 1.2rem;
+      transition: all 0.3s;
+    }
+    button:hover {
+      transform: scale(1.06);
+      box-shadow: 0 8px 24px rgba(167,139,250,0.4);
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 7rem;
+      color: #606080;
+      font-size: 1rem;
+    }
+
+    @media (max-width: 640px) {
+      h1 { font-size: 3.4rem; }
+      .container { padding: 4rem 1.2rem 6rem; }
+      .section { padding: 2rem; }
+    }
+  </style>
 </head>
 <body>
-<h1>Sachin - Home</h1>
-<h2>Sachin</h2>
 
-<p id="age">Loading your age...</p>
-<p id="left">Loading years left...</p>
+  <canvas id="physics-canvas"></canvas>
 
-<hr>
+  <div class="container">
 
-<h3>Projects (add your own later)</h3>
-<ul>
-<li>Atom Simulation</li>
-<li>Black Hole Simulation</li>
-<li>Gravity Simulation</li>
-</ul>
+    <header>
+      <h1>Sachin</h1>
+      <div class="tagline" id="typing-tagline"></div>
+      <div class="age-line">
+        <span id="age">Calculating age...</span> • 
+        <span id="years-left">Counting years left...</span>
+      </div>
+    </header>
 
-<hr>
-<p><a href="https://github.com/sachin" target="_blank">My GitHub</a> (change link later)</p>
+    <!-- Interactive Gravity Toy -->
+    <div class="section">
+      <h2>Play with tiny gravity</h2>
+      <p style="margin-bottom:1.5rem; color:#b0b0e0;">
+        Move your mouse (or finger) around — watch how particles get attracted like mini black holes or atoms in your simulations. Stay a bit and feel the physics vibe.
+      </p>
+      <!-- The canvas is fixed behind, but this section invites attention -->
+    </div>
 
-<script>
-// ================== YOUR INFO (birth 27 Nov 1998 8:15 PM) ==================
-const birthDate = new Date(1998, 10, 27, 20, 15, 0);
-// November is month 10 (because January = 0), 20 = 8 PM
+    <!-- Quick Quiz -->
+    <div class="section">
+      <h2>Which kind of creator are you? (30-second quiz)</h2>
+      <p>Answer one question — get a fun label tied to physics & code:</p>
+      
+      <div class="quiz-option" data-score="blackhole">I love chaotic, unstoppable forces</div>
+      <div class="quiz-option" data-score="atom">I enjoy elegant, tiny precise systems</div>
+      <div class="quiz-option" data-score="gravity">I'm all about invisible connections pulling things together</div>
+      
+      <div class="quiz-result" id="quiz-result">
+        <h3>Your vibe:</h3>
+        <p id="quiz-text"></p>
+      </div>
+    </div>
 
-const lifeExpectancy = 91;
-// ==========================================================================
+    <!-- Random Physics Facts -->
+    <div class="section">
+      <h2>Random physics bite</h2>
+      <p id="fact-text">Click below to learn something weird & wonderful about the universe...</p>
+      <button id="new-fact">Reveal a new fact →</button>
+    </div>
 
-function updateAge() {
-const now = new Date();
-const msLived = now - birthDate;
-const years = msLived / (1000 * 60 * 60 * 24 * 365.2425);
+    <footer>
+      Made with curiosity • Mysuru, 2026
+    </footer>
 
-document.getElementById('age').textContent =
-`I am ${years.toFixed(15)} years old`;
+  </div>
 
-const yearsLeft = lifeExpectancy - years;
-document.getElementById('left').textContent =
-`I probably have ${yearsLeft.toFixed(15)} years left`;
-}
+  <script>
+    // ─────────────── Age calculator ───────────────
+    const birthDate = new Date("2000-05-15"); // ← change to your real birth date
+    const lifeExpectancy = 82;
+    const now = new Date();
+    let age = now.getFullYear() - birthDate.getFullYear();
+    if (now < new Date(now.getFullYear(), birthDate.getMonth(), birthDate.getDate())) age--;
+    const yearsLived = age + (now - new Date(now.getFullYear(), birthDate.getMonth(), birthDate.getDate())) / (365.25 * 86400000);
+    const yearsLeft = lifeExpectancy - yearsLived;
+    document.getElementById("age").textContent = `Age ${age}`;
+    document.getElementById("years-left").textContent = `≈ ${yearsLeft.toFixed(1)} years of adventures left`;
 
-setInterval(updateAge, 10);
-updateAge();
-</script>
+    // ─────────────── Typing tagline ───────────────
+    const tag = "Creative Coder  •  Physics Enthusiast  •  Building tiny universes";
+    let i = 0;
+    function type() {
+      if (i < tag.length) {
+        document.getElementById("typing-tagline").textContent += tag.charAt(i);
+        i++;
+        setTimeout(type, 60);
+      }
+    }
+    setTimeout(type, 800);
+
+    // ─────────────── Mouse gravity particles ───────────────
+    const canvas = document.getElementById('physics-canvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+
+    const particles = [];
+    const mouse = { x: null, y: null, radius: 120 };
+
+    class Particle {
+      constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 3 + 1;
+        this.speedX = Math.random() * 1.5 - 0.75;
+        this.speedY = Math.random() * 1.5 - 0.75;
+      }
+      update() {
+        if (mouse.x && mouse.y) {
+          let dx = mouse.x - this.x;
+          let dy = mouse.y - this.y;
+          let distance = Math.sqrt(dx*dx + dy*dy);
+          if (distance < mouse.radius) {
+            let force = (mouse.radius - distance) / mouse.radius;
+            this.x -= dx * force * 0.08;
+            this.y -= dy * force * 0.08;
+          }
+        }
+        this.x += this.speedX * 0.4;
+        this.y += this.speedY * 0.4;
+        if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+        if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+      }
+      draw() {
+        ctx.fillStyle = 'rgba(160, 180, 255, 0.7)';
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI*2);
+        ctx.fill();
+      }
+    }
+
+    for (let i = 0; i < 80; i++) particles.push(new Particle());
+
+    function animate() {
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      particles.forEach(p => { p.update(); p.draw(); });
+      requestAnimationFrame(animate);
+    }
+    animate();
+
+    window.addEventListener('mousemove', e => { mouse.x = e.x; mouse.y = e.y; });
+    window.addEventListener('touchmove', e => {
+      mouse.x = e.touches[0].clientX;
+      mouse.y = e.touches[0].clientY;
+    });
+
+    // ─────────────── Quiz logic ───────────────
+    document.querySelectorAll('.quiz-option').forEach(opt => {
+      opt.addEventListener('click', () => {
+        const score = opt.dataset.score;
+        let result = "";
+        if (score === "blackhole") result = "You're a <strong>Black Hole Coder</strong> — intense, mysterious, pulling ideas into deep simulations.";
+        else if (score === "atom") result = "You're an <strong>Atomic Architect</strong> — precision lover, building elegant microscopic worlds.";
+        else result = "You're a <strong>Gravity Weaver</strong> — master of invisible forces that connect everything in code & physics.";
+        
+        document.getElementById('quiz-text').innerHTML = result;
+        document.getElementById('quiz-result').style.display = 'block';
+      });
+    });
+
+    // ─────────────── Random facts ───────────────
+    const facts = [
+      "If you could fold a piece of paper 42 times, it would reach the Moon.",
+      "Neutron stars can spin up to 700 times per second — imagine that as code loops.",
+      "The universe is beige — officially called 'Cosmic Latte'.",
+      "A day on Venus is longer than a year on Venus.",
+      "Quantum entanglement means two particles can instantly affect each other — even across galaxies.",
+      "There are more trees on Earth (\~3 trillion) than stars in the Milky Way (\~100–400 billion).",
+      "Time moves slower at sea level than on a mountain — thanks to general relativity.",
+      "The smell of rain is caused by a bacteria called actinomycetes — physics meets biology."
+    ];
+
+    document.getElementById('new-fact').addEventListener('click', () => {
+      const randomFact = facts[Math.floor(Math.random() * facts.length)];
+      document.getElementById('fact-text').textContent = randomFact;
+    });
+    // Show one immediately
+    document.getElementById('fact-text').textContent = facts[0];
+  </script>
+
 </body>
 </html>
