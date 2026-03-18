@@ -52,15 +52,7 @@
       -webkit-background-clip: text;
       background-clip: text;
       animation: gradientFlow 12s linear infinite, breathe 8s ease-in-out infinite;
-      margin-bottom: 1.5rem;
-    }
-
-    h2 {
-      font-size: 2.1rem;
-      color: #88ffaa;
-      margin-bottom: 2.5rem;
-      opacity: 0;
-      animation: fadeInUp 1.2s ease-out 0.4s forwards;
+      margin-bottom: 3rem;
     }
 
     .stats {
@@ -126,7 +118,6 @@
 
     @media (max-width: 600px) {
       h1 { font-size: 3.6rem; }
-      h2 { font-size: 1.8rem; }
       .stats { font-size: 1.4rem; }
     }
   </style>
@@ -137,7 +128,6 @@
 
   <div class="content">
     <h1>Sachin</h1>
-    <h2>Creative Coder · Physics Enthusiast</h2>
 
     <div class="stats">
       <div id="age">Loading your age...</div>
@@ -190,7 +180,7 @@
     }
     animateBg();
 
-    // ─── Age calculator (your exact format kept) ───
+    // ─── Age calculator ───
     const birthDate = new Date(1998, 10, 27, 20, 15, 0); // Nov 27 1998 8:15 PM
     const lifeExpectancy = 91;
 
