@@ -1,4 +1,4 @@
-      <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -137,4 +137,78 @@
 
   <div class="content">
     <h1>Sachin</h1>
-    <h2>Creative Coder
+    <h2>Creative Coder · Physics Enthusiast</h2>
+
+    <div class="stats">
+      <div id="age">Loading your age...</div>
+      <div id="left">Loading years left...</div>
+    </div>
+
+    <a href="https://github.com/0warlord0" class="github-link" target="_blank" rel="noopener">
+      → GitHub
+    </a>
+  </div>
+
+  <script>
+    // ─── Background subtle particles ───
+    const canvas = document.getElementById('bg');
+    const ctx = canvas.getContext('2d');
+
+    function resize() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    const particles = [];
+    for (let i = 0; i < 60; i++) {
+      particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        radius: Math.random() * 1.6 + 0.4,
+        vx: (Math.random() - 0.5) * 0.3,
+        vy: (Math.random() - 0.5) * 0.3
+      });
+    }
+
+    function animateBg() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach(p => {
+        p.x += p.vx;
+        p.y += p.vy;
+
+        if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+        if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(100, 255, 180, 0.5)';
+        ctx.fill();
+      });
+      requestAnimationFrame(animateBg);
+    }
+    animateBg();
+
+    // ─── Age calculator (your exact format kept) ───
+    const birthDate = new Date(1998, 10, 27, 20, 15, 0); // Nov 27 1998 8:15 PM
+    const lifeExpectancy = 91;
+
+    function updateAge() {
+      const now = new Date();
+      const msLived = now - birthDate;
+      const years = msLived / (1000 * 60 * 60 * 24 * 365.2425);
+
+      document.getElementById('age').textContent =
+        `I am ${years.toFixed(15)} years old`;
+
+      const yearsLeft = lifeExpectancy - years;
+      document.getElementById('left').textContent =
+        `I probably have ${yearsLeft.toFixed(15)} years left`;
+    }
+
+    setInterval(updateAge, 10);
+    updateAge();
+  </script>
+</body>
+</html>
